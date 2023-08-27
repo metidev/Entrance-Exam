@@ -72,7 +72,7 @@ function calc($all, $correct, $wrong)
             border-radius: 2px;
             margin: 1rem;
             border: none;
-            width: 80%;
+            width: 57%;
             background: rgba(0, 0, 0, 0);
             transition: padding-top 0.2s ease, margin-top 0.2s ease;
             overflow-x: hidden;
