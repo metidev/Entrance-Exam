@@ -72,7 +72,6 @@ function calc($all, $correct, $wrong)
             border-radius: 2px;
             margin: 1rem;
             border: none;
-            width: 57%;
             background: rgba(0, 0, 0, 0);
             transition: padding-top 0.2s ease, margin-top 0.2s ease;
             overflow-x: hidden;
@@ -87,8 +86,6 @@ function calc($all, $correct, $wrong)
             white-space: nowrap;
             padding: 0;
             margin: 0;
-            width: 80%;
-            border-top: 1px solid red;
             -webkit-transition: width 0.4s ease;
             transition: width 0.4s ease;
             height: 0px;
@@ -193,11 +190,11 @@ function calc($all, $correct, $wrong)
             ?>
 
         </h1>
-        <input type="number" name="correct" class="question" id="correct" required autocomplete="off" />
+        <input type="text" name="correct" class="question" id="correct" required autocomplete="off" />
         <label for="correct"><span>به چند سوال پاسخ صحیح دادید؟</span></label>
-        <input type="number" name="wrong" class="question" id="wrong" required autocomplete="off" />
+        <input type="text" name="wrong" class="question" id="wrong" required autocomplete="off" />
         <label for="wrong"><span>به چند سوال پاسخ اشتباه دادید؟</span></label>
-        <input type="number" name="all" class="question" id="all" required autocomplete="off" />
+        <input type="text" name="all" class="question" id="all" required autocomplete="off" />
         <label for="all"><span>تعداد کل سوالات را وارد کنید</span></label>
         <input type="submit" value="محاسبه!" />
     </form>
