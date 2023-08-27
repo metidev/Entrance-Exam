@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 function calc($all, $correct, $wrong)
 {
-    return (($correct - $wrong) / $all) * 100;
+    return round((($correct - $wrong) / $all) * 100);
 }
 ?>
 <!DOCTYPE html>
@@ -22,7 +22,8 @@ function calc($all, $correct, $wrong)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam</title>
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet"
+        type="text/css" />
 
     <style type="text/css">
         html {
@@ -31,9 +32,10 @@ function calc($all, $correct, $wrong)
         }
 
         body {
-            margin: 5% auto 0 auto;
-            width: 90%;
-            max-width: 1125px;
+            direction: rtl;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         h1 {
@@ -44,16 +46,17 @@ function calc($all, $correct, $wrong)
         input,
         span,
         label,
-         {
-            font-family: 'Ubuntu', Tahoma;
-            display: block;
-            margin: 10px;
-            padding: 5px;
-            border: none;
-            font-size: 22px;
+        {
+        font-family: 'Ubuntu', Tahoma;
+        display: block;
+        margin: 10px;
+        padding: 5px;
+        border: none;
+        font-size: 22px;
         }
-        input::placeholder{
-            font-family: 'vazirmatn',Tahoma;
+
+        input::placeholder {
+            font-family: 'vazirmatn', Tahoma;
         }
 
         textarea:focus,
@@ -63,12 +66,11 @@ function calc($all, $correct, $wrong)
 
         /* Question */
 
-        input.question,
-        textarea.question {
+        input.question {
             font-size: 48px;
             font-weight: 300;
             border-radius: 2px;
-            margin: 0;
+            margin: 1rem;
             border: none;
             width: 80%;
             background: rgba(0, 0, 0, 0);
@@ -79,22 +81,20 @@ function calc($all, $correct, $wrong)
 
         /* Underline and Placeholder */
 
-        input.question+label,
-        textarea.question+label {
+        input.question+label {
             display: block;
             position: relative;
             white-space: nowrap;
             padding: 0;
             margin: 0;
-            width: 10%;
+            width: 80%;
             border-top: 1px solid red;
             -webkit-transition: width 0.4s ease;
             transition: width 0.4s ease;
             height: 0px;
         }
 
-        input.question:focus+label,
-        textarea.question:focus+label {
+        input.question:focus+label{
             width: 80%;
         }
 
@@ -103,10 +103,7 @@ function calc($all, $correct, $wrong)
             padding-top: 35px;
         }
 
-        textarea.question:valid,
-        textarea.question:focus {
-            margin-top: 35px;
-        }
+    
 
         input.question:focus+label>span,
         input.question:valid+label>span {
@@ -115,25 +112,16 @@ function calc($all, $correct, $wrong)
             color: #333;
         }
 
-        textarea.question:focus+label>span,
-        textarea.question:valid+label>span {
-            top: -150px;
-            font-size: 22px;
-            color: #333;
-        }
 
-        input.question:valid+label,
-        textarea.question:valid+label {
+        input.question:valid+label {
             border-color: green;
         }
 
-        input.question:invalid,
-        textarea.question:invalid {
+        input.question:invalid {
             box-shadow: none;
         }
 
-        input.question+label>span,
-        textarea.question+label>span {
+        input.question+label>span{
             font-weight: 300;
             margin: 0;
             position: absolute;
@@ -147,6 +135,10 @@ function calc($all, $correct, $wrong)
         }
 
         input[type="submit"] {
+            font-family: 'vazirmatn';
+            outline: none;
+            border: none;
+            border-radius: 5px;
             -webkit-transition: opacity 0.2s ease, background 0.2s ease;
             transition: opacity 0.2s ease, background 0.2s ease;
             display: block;
@@ -168,6 +160,7 @@ function calc($all, $correct, $wrong)
         textarea.question:valid~input[type="submit"] {
             -webkit-animation: appear 1s forwards;
             animation: appear 1s forwards;
+        }
         }
 
         input.question:invalid~input[type="submit"],
@@ -194,19 +187,18 @@ function calc($all, $correct, $wrong)
     <form action="index.php" method="post">
         <h1>
             <?php if ($_SERVER['REQUEST_METHOD'] === 'POST')
-                echo "درصد شما:" .calc($all, $correct, $wrong);
-            
+                echo "درصد شما:" . calc($all, $correct, $wrong);
             else
                 echo "محاسبه درصد یا نمره خام";
             ?>
 
         </h1>
-        <input type="text" name="correct" class="question" id="nme" required autocomplete="off" />
-        <label for="nme"><span>به چند سوال پاسخ صحیح دادید؟</span></label>
-        <input type="text" name="wrong" class="question" id="nme" required autocomplete="off" />
-        <label for="msg"><span>به چند سوال پاسخ اشتباه دادید؟</span></label>
-        <input type="text" name="all" class="question" id="nme" required autocomplete="off" />
-        <label for="msg"><span>تعداد کل سوالات را وارد کنید</span></label>
+        <input type="number" name="correct" class="question" id="correct" required autocomplete="off" />
+        <label for="correct"><span>به چند سوال پاسخ صحیح دادید؟</span></label>
+        <input type="number" name="wrong" class="question" id="wrong" required autocomplete="off" />
+        <label for="wrong"><span>به چند سوال پاسخ اشتباه دادید؟</span></label>
+        <input type="number" name="all" class="question" id="all" required autocomplete="off" />
+        <label for="all"><span>تعداد کل سوالات را وارد کنید</span></label>
         <input type="submit" value="محاسبه!" />
     </form>
 </body>
